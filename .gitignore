@@ -1,0 +1,9 @@
+*.class
+*.orig
+*.iml
+.classpath
+.gradle
+.groovy
+.idea
+.project
+build/
