@@ -1,4 +1,8 @@
 package ebay.filter.pages
 
-class SearchResultsPage {
+import geb.Page
+
+class SearchResultsPage extends Page {
+
+    
 }

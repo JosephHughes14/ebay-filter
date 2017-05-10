@@ -10,7 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 
 waiting {
-    timeout = 2
+    timeout = 5
 }
 
 environments {
