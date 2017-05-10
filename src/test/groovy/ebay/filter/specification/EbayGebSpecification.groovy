@@ -1,3 +1,5 @@
+package ebay.filter.specification
+
 import geb.spock.GebReportingSpec
 import spock.lang.Shared
 
