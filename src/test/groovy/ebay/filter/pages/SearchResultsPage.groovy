@@ -1,7 +1,7 @@
 package ebay.filter.pages
 
 import ebay.filter.domain.SortOptions
-import ebay.filter.pages.modules.ResultItemModule
+import ebay.filter.pages.modules.SearchResultListingModule
 import ebay.filter.pages.modules.SortResultsModule
 import geb.Page
 import geb.navigator.Navigator
@@ -15,7 +15,7 @@ class SearchResultsPage extends Page {
     static content = {
         sort                      { module SortResultsModule }
         listingFilterContainer    { $("div", class:"pnl-b") }
-        resultItems              { $("li", class:"lvresult").collect { it.module(ResultItemModule) } }
+        searchResultListings      { $("li", class:"lvresult").collect { it.module(SearchResultListingModule) } }
     }
 
     void sortBy(Integer sortOptionValue) {
@@ -26,21 +26,21 @@ class SearchResultsPage extends Page {
         listingFilterContainer.find(class:"tgl_button").find { it.text().contains(listingType) }.click()
     }
 
-    List<Navigator> singlePriceItems() {
+    List<Navigator> singlePriceListings() {
         //TODO: Document this hack
-        resultItems.findAll { listing ->
+        searchResultListings.findAll { listing ->
             listing.singlePrice()
         }
     }
 
     List<BigDecimal> resultPrices() {
-        singlePriceItems().collect { listing ->
+        singlePriceListings().collect { listing ->
             listing.listingPrice()
         }
     }
 
     List<BigDecimal> resultPriceAndPostages() {
-        singlePriceItems().collect { listing ->
+        singlePriceListings().collect { listing ->
             listing.listingPriceAndPostage()
         }
     }
