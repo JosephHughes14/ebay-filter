@@ -27,8 +27,8 @@ class SearchFilterAndSortSpec extends EbayGebSpecification {
         sortBy(sortType)
 
         then: "The first listing has a price"
-        searchResultListings.first().listingPrice() >= minimumPrice
-        searchResultListings.first().freePostage() || searchResultListings.first().postagePrice() >= minimumPrice
+        singlePriceListings.first().listingPrice() >= minimumPrice
+        singlePriceListings.first().freePostage() || singlePriceListings.first().postagePrice() >= minimumPrice
 
         where:
         listingType                        | sortType
@@ -54,7 +54,7 @@ class SearchFilterAndSortSpec extends EbayGebSpecification {
         sortBy(sortType)
 
         then: "The first listing is a buy it now listing"
-        searchResultListings.first().isBuyItNow()
+        singlePriceListings.first().isBuyItNow()
 
         where: sortType << [
             SortOptions.LOW_PRICE,
@@ -80,7 +80,7 @@ class SearchFilterAndSortSpec extends EbayGebSpecification {
         sortBy(sortType)
 
         then: "The first listing is a buy it now listing"
-        searchResultListings.first().numberOfBids() >= 0
+        singlePriceListings.first().numberOfBids() >= 0
 
         where: sortType << [
                 SortOptions.LOW_PRICE,

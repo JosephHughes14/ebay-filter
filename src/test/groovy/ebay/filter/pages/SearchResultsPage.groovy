@@ -16,6 +16,7 @@ class SearchResultsPage extends Page {
         sort                      { module SortResultsModule }
         listingFilterContainer    { $("div", class:"pnl-b") }
         searchResultListings      { $("li", class:"lvresult").collect { it.module(SearchResultListingModule) } }
+        pages                     { $("td", class:"pages") }
     }
 
     void sortBy(Integer sortOptionValue) {
@@ -24,6 +25,10 @@ class SearchResultsPage extends Page {
 
     void filterBy(String listingType) {
         listingFilterContainer.find(class:"tgl_button").find { it.text().contains(listingType) }.click()
+    }
+
+    void gotoPage(Integer pageNumber) {
+        pages.find("a", class:"pg").find { it.text() == pageNumber.toString() }.click()
     }
 
     List<Navigator> singlePriceListings() {
@@ -45,35 +50,19 @@ class SearchResultsPage extends Page {
         }
     }
 
-    Boolean sortedAscendingPrice() {
-        resultPrices() == resultPrices().sort()
-    }
-
-    Boolean sortedAscendingPriceAndPostage() {
-        resultPriceAndPostages() == resultPriceAndPostages().sort()
-    }
-
-    Boolean sortedDecendingPrice() {
-        resultPrices() == resultPrices().sort().reverse()
-    }
-
-    Boolean sortedDecendingPriceAndPostage() {
-        resultPriceAndPostages() == resultPriceAndPostages().sort().reverse()
-    }
-
     Boolean isSortedBy(Integer sortOptionValue) {
         switch (sortOptionValue) {
             case SortOptions.LOW_PRICE:
-                sortedAscendingPrice()
+                resultPrices() == resultPrices().sort()
                 break
             case SortOptions.HIGH_PRICE:
-                sortedDecendingPrice()
+                resultPrices() == resultPrices().sort().reverse()
                 break
             case SortOptions.LOW_PRICE_AND_PP:
-                sortedAscendingPriceAndPostage()
+                resultPriceAndPostages() == resultPriceAndPostages().sort()
                 break
             case SortOptions.HIGH_PRICE_AND_PP:
-                sortedDecendingPriceAndPostage()
+                resultPriceAndPostages() == resultPriceAndPostages().sort().reverse()
                 break
             default:
                 false
