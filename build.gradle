@@ -26,9 +26,6 @@ dependencies {
     testCompile "org.codehaus.groovy:groovy-all:$groovyVersion"
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
-    testCompile("com.codeborne:phantomjsdriver:1.3.0") {
-        transitive = false
-    }
 }
 
 drivers.each { driver ->
@@ -50,13 +47,6 @@ chromeTest {
 
     def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
     systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename).absolutePath
-}
-
-phantomJsTest {
-    dependsOn unzipPhantomJs
-
-    def phantomJsFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "phantomjs.exe" : "bin/phantomjs"
-    systemProperty "phantomjs.binary.path", new File(unzipPhantomJs.outputs.files.singleFile, phantomJsFilename).absolutePath
 }
 
 test {
