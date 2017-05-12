@@ -45,4 +45,23 @@ class SearchFilterSpec extends EbayGebSpecification {
         ListingFilterOptions.AUCTION       | SortOptions.HIGH_PRICE_AND_PP
         ListingFilterOptions.ALL_LISTINGS  | SortOptions.HIGH_PRICE_AND_PP
     }
+
+    def "Sorting by newest listing, in Auctions, for a popular item should yeild zero bid items"() {
+
+        given: "As a user I navigate to the Ebay Home Page"
+        to EbayHomePage
+
+        when: "I Search for an item"
+        search.searchFor "iPhone"
+
+        then: "I am directed to the search results page"
+        at SearchResultsPage
+
+        when: "I filter the results by #listingType and sort by #sortType"
+        filterBy(ListingFilterOptions.AUCTION)
+        sortBy(SortOptions.NEWEST)
+
+        then: "The first item in the results should have zeo bids"
+        resultItems.first().numberOfBids() == 0
+    }
 }

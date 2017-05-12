@@ -1,13 +1,12 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 
 ext {
-    drivers = ["firefox", "chrome", "phantomJs"]
+    drivers = ["firefox", "chrome"]
     ext {
         groovyVersion = '2.4.8'
         gebVersion = '1.1.1'
         seleniumVersion = '2.53.0'
         chromeDriverVersion = '2.24'
-        phantomJsVersion = '2.1.1'
     }
 }
 
