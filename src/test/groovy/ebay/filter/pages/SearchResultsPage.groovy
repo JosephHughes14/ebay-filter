@@ -32,7 +32,6 @@ class SearchResultsPage extends Page {
     }
 
     List<Navigator> singlePriceListings() {
-        //TODO: Document this hack
         searchResultListings.findAll { listing ->
             listing.singlePrice()
         }
