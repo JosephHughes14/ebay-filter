@@ -18,7 +18,7 @@ class PaginationSpec extends EbayGebSpecification {
         at SearchResultsPage
 
         when: "I store the price of first listing on page 1"
-        def pageOneListingPrice = singlePriceListings.first().listingPrice()
+        def pageOneListingPrice = singlePriceListings().first().listingPrice()
 
         and: "I click page 4 of the page selector"
         gotoPage(4)

@@ -7,11 +7,12 @@ class SearchResultListingModule extends Module {
     static final String POUNDSYMBOL = "\u00A3"
 
     static content = {
-        title                         { $("h3", class:"lvtitle").find("a").attr("title") }
-        price                         { $("li", class:"lvprice") }
-        format                        { $("li", class: "lvformat") }
-        shippingFee(required: false)  { $("li", class:"lvshipping").find("span", class:"fee").text() }
-        buyItNowLogo(required: false) { $("span", title:"Buy it now") }
+        title                                  { $("h3", class:"lvtitle").find("a").attr("title") }
+        price                                  { $("li", class:"lvprice") }
+        format                                 { $("li", class: "lvformat") }
+        shippingFee(required: false)           { $("li", class:"lvshipping").find("span", class:"fee").text() }
+        buyItNowLogo(required: false)          { $("span", title:"Buy it now") }
+        buyItNowBestOfferLogo(required: false) { $("span", title:"Buy it now or Best Offer") }
     }
 
     Integer numberOfBids() {
@@ -53,7 +54,7 @@ class SearchResultListingModule extends Module {
     }
 
     Boolean isBuyItNow() {
-        buyItNowLogo
+        buyItNowLogo || buyItNowBestOfferLogo
     }
 
     Boolean titleContains(String searchTerm) {
